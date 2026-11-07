@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS inventory (
+    sku VARCHAR(64) PRIMARY KEY,
+    quantity INTEGER NOT NULL
+);

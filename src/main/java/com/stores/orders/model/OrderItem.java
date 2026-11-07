@@ -1,11 +1,30 @@
 package com.stores.orders.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.math.BigDecimal;
 
 /**
  * Order line: product (SKU), quantity and unit price.
  */
-public record OrderItem(String sku, int quantity, BigDecimal unitPrice) {
+@Schema(description = "Order line")
+public record OrderItem(
+    @Schema(
+        description = "Product SKU",
+        example = "RICE",
+        requiredMode = Schema.RequiredMode.REQUIRED)
+    String sku,
+    @Schema(
+        description = "Quantity ordered (greater than zero)",
+        example = "2",
+        minimum = "1",
+        requiredMode = Schema.RequiredMode.REQUIRED)
+    int quantity,
+    @Schema(
+        description = "Unit price (zero or greater)",
+        example = "50000",
+        minimum = "0",
+        requiredMode = Schema.RequiredMode.REQUIRED)
+    BigDecimal unitPrice) {
 
   public OrderItem {
     if (sku == null || sku.isBlank()) {

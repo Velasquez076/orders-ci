@@ -20,6 +20,38 @@ Stock is no longer held in memory: every order is validated against the `invento
 The `dev` profile applies safe local defaults; `test` uses an in-memory H2 database; `prod`
 requires the three variables and validates the existing schema (`spring.jpa.hibernate.ddl-auto=validate`).
 
+## API documentation (Swagger / OpenAPI v3)
+
+With the application running (`mvn spring-boot:run`), the interactive documentation and the
+machine-readable contract are available at:
+
+| Resource | URL |
+|----------|-----|
+| Swagger UI | `http://localhost:8080/swagger-ui.html` |
+| OpenAPI JSON (for Postman/Insomnia/frontend codegen) | `http://localhost:8080/v3/api-docs` |
+| OpenAPI YAML | `http://localhost:8080/v3/api-docs.yaml` |
+
+### Available endpoints
+
+| Method | Path | Description |
+|--------|------|-------------|
+| `POST` | `/api/orders/total` | Validates stock and calculates subtotal, discount and total. |
+| `GET` | `/api/info` | Returns the active environment name. |
+
+For the frontend handoff, share the `http://localhost:8080/v3/api-docs` URL (or the generated
+`v3/api-docs.yaml`): it can be imported directly into Postman/Insomnia or used to generate a typed
+client. The Swagger UI also documents request/response schemas, examples and error codes
+(`400` invalid data, `409` insufficient stock).
+
+The contract is also committed as static files ready to share with the frontend team:
+[`docs/openapi.json`](docs/openapi.json) and [`docs/openapi.yaml`](docs/openapi.yaml). To regenerate
+them from a running application:
+
+```bash
+curl http://localhost:8080/v3/api-docs      -o docs/openapi.json
+curl http://localhost:8080/v3/api-docs.yaml -o docs/openapi.yaml
+```
+
 ## Run the tests (single command)
 
 ```bash
