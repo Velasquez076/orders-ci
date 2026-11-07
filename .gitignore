@@ -1,0 +1,22 @@
+# Compilados
+target/
+*.class
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/
+
+# Secretos y configuración local: NUNCA al repositorio
+.env
+*.env
+application-local*.properties
+*.pem
+*.key
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
