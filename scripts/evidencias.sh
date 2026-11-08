@@ -2,6 +2,8 @@
 # Generates evidence files with a visible DATE. Run from the repository root.
 # Usage: ./scripts/evidencias.sh tests | docker
 set -u
+# Always run from the repository root, whatever the current directory is.
+cd "$(dirname "$0")/.." || exit 1
 mkdir -p evidencias
 stamp() { echo "=== $(date '+%Y-%m-%d %H:%M:%S %Z') | $(whoami)@$(hostname) ==="; }
 

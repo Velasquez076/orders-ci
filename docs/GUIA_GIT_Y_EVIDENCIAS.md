@@ -74,15 +74,18 @@ Guarden la salida en `evidencias/03_clonar_y_probar.txt`.
 
 Para demostrar qué cambia entre ambientes con la **misma imagen**:
 
+La API necesita PostgreSQL, así que se levanta con Docker Compose (contenedor `api` + contenedor `db`):
+
 ```bash
-docker build -t orders-app .
-docker run --rm -d -p 8080:8080 -e SPRING_PROFILES_ACTIVE=dev  --name app-dev  orders-app
+cp .env.example .env                       # credenciales propias, .env no se sube al repo
+docker compose up -d --build
 curl http://localhost:8080/api/info        # {"environment":"development"}
-docker stop app-dev
-docker run --rm -d -p 8080:8080 -e SPRING_PROFILES_ACTIVE=prod --name app-prod orders-app
+SPRING_PROFILES_ACTIVE=prod docker compose up -d api
 curl http://localhost:8080/api/info        # {"environment":"production"}
-docker stop app-prod
+docker compose down
 ```
+
+Errores encontrados al dockerizar y su corrección: [`DOCKER_INCIDENCIAS.md`](DOCKER_INCIDENCIAS.md).
 
 ## 5. Antes de entregar
 
