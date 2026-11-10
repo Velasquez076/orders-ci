@@ -13,7 +13,7 @@
 
     <groupId>com.stores</groupId>
     <artifactId>orders</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.0.2-RC</version>
     <name>orders</name>
     <description>Order total with discounts and stock validation backed by a database</description>
 
